@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Tendero_MP1</string>
+    <string name="stardew_valley_memory_game">Stardew Valley Memory Game</string>
+    <string name="time_60s">Time: 60s</string>
+    <string name="restart_game">Restart Game</string>
+    <string name="level_1_time_40s">Level: 1 | Time: 40s</string>
+    <string name="made_by_kurt_tendero">Made by: Kurt Tendero</string>
+    <string name="play_game">Play Game</string>
+    <string name="memory_game">Memory Game</string>
+</resources>

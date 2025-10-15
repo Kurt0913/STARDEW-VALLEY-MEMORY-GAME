@@ -22,18 +22,16 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvTimer;
+    private ImageView ivExitButton;
     private GridLayout gridLayout;
-
     private ArrayList<Integer> allCardImages;
     private List<Integer> currentLevelCardImages;
     private ArrayList<ImageView> cards;
     private int firstCard = -1, secondCard = -1;
     private int matchedPairs = 0;
     private boolean isChecking = false;
-
     private int currentLevel = 1;
     private static final int MAX_LEVEL = 3;
-
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
 
@@ -47,6 +45,19 @@ public class MainActivity extends AppCompatActivity {
         Button btnRestart = findViewById(R.id.btnRestart);
 
         btnRestart.setOnClickListener(v -> restartGame());
+
+        ivExitButton = findViewById(R.id.ivExitButton);
+
+        ivExitButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Quit Game?")
+                    .setMessage("Are you sure you want to quit and return to the main menu?")
+                    .setPositiveButton("Quit", (dialog, which) -> {
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null) // User clicks Cancel, dialog just closes.
+                    .show();
+        });
 
         loadAllCardImages();
         setupGame();
@@ -206,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateTimerText() {
         int seconds = (int) (timeLeftInMillis / 1000);
-        tvTimer.setText(String.format(Locale.ROOT, "Level: %d | Time: %ds", currentLevel, seconds));
+        tvTimer.setText(String.format(Locale.ROOT, "Level: %d\nTime: %ds", currentLevel, seconds));
     }
 
     private void gameWon() {

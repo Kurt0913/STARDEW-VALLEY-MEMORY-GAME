@@ -25,15 +25,14 @@
         android:shadowDy="4"
         android:shadowRadius="2"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnPlayGame"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/play_game"
-        android:textSize="20sp"
-        android:fontFamily="@font/press_start_2p"
-        app:backgroundTint="#754C24" />
+        android:background="@android:color/transparent"
+        android:contentDescription="Play Game"
+        android:src="@drawable/button_play" />
 
     <TextView
         android:id="@+id/tvCreatorCredit"

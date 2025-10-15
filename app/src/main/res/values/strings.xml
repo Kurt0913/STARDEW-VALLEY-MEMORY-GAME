@@ -7,4 +7,5 @@
     <string name="made_by_kurt_tendero">Made by: Kurt Tendero</string>
     <string name="play_game">Play Game</string>
     <string name="memory_game">Memory Game</string>
+    <string name="exit_game">Exit Game</string>
 </resources>

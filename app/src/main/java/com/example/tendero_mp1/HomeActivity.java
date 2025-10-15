@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -13,7 +14,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button btnPlayGame = findViewById(R.id.btnPlayGame);
+        ImageButton btnPlayGame = findViewById(R.id.btnPlayGame);
 
         btnPlayGame.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);

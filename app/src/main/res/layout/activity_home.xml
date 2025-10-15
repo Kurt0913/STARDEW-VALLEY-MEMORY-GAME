@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/background_stardew"
+    android:background="@drawable/background_menu"
     tools:context=".HomeActivity">
+
 
     <TextView
         android:id="@+id/tvGameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="@string/memory_game"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:textStyle="bold"
+
+        android:layout_marginTop="400dp"
+
         android:fontFamily="@font/press_start_2p"
         android:shadowColor="#000000"
-        android:shadowDx="4"
-        android:shadowDy="4"
-        android:shadowRadius="2"/>
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"
+        android:text="Memory Game"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/btnPlayGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="600dp"
+
         android:background="@android:color/transparent"
         android:contentDescription="Play Game"
         android:src="@drawable/button_play" />
+
 
     <TextView
         android:id="@+id/tvCreatorCredit"
@@ -46,7 +54,8 @@
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="1.5"
-        android:text="@string/made_by_kurt_tendero"
+        android:text="Made by: Kurt Tendero"
         android:textColor="#FFFFFF"
         android:textSize="14sp" />
+
 </RelativeLayout>

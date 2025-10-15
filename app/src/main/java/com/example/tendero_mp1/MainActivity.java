@@ -13,6 +13,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvTimer;
     private ImageView ivExitButton;
+    private MediaPlayer gamePlayer;
     private GridLayout gridLayout;
     private ArrayList<Integer> allCardImages;
     private List<Integer> currentLevelCardImages;
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         ivExitButton = findViewById(R.id.ivExitButton);
 
+        gamePlayer = MediaPlayer.create(this, R.raw.music_game);
+        gamePlayer.setLooping(true);
+        gamePlayer.setVolume(0.5f, 0.5f);
+
         ivExitButton.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle("Quit Game?")
@@ -55,12 +61,44 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("Quit", (dialog, which) -> {
                         finish();
                     })
-                    .setNegativeButton("Cancel", null) // User clicks Cancel, dialog just closes.
+                    .setNegativeButton("Cancel", null)
                     .show();
         });
+        currentLevel = getIntent().getIntExtra("SELECTED_LEVEL", 1);
 
         loadAllCardImages();
         setupGame();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (gamePlayer != null) {
+            gamePlayer.start();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (gamePlayer != null && gamePlayer.isPlaying()) {
+            gamePlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (gamePlayer != null) {
+            gamePlayer.stop();
+            gamePlayer.release();
+            gamePlayer = null;
+        }
+
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 
     private void loadAllCardImages() {
@@ -265,11 +303,4 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Game Restarted!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-    }
 }

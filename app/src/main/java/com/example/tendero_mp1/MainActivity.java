@@ -21,11 +21,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    // UI Components
     private TextView tvTimer;
     private GridLayout gridLayout;
 
-    // Game Variables
     private ArrayList<Integer> allCardImages;
     private List<Integer> currentLevelCardImages;
     private ArrayList<ImageView> cards;
@@ -33,11 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private int matchedPairs = 0;
     private boolean isChecking = false;
 
-    // Level Management
     private int currentLevel = 1;
     private static final int MAX_LEVEL = 3;
 
-    // Timer
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
 
@@ -73,32 +69,27 @@ public class MainActivity extends AppCompatActivity {
         int gridRowCount;
         int numPairs;
 
-        // --- MODIFIED: Level configurations updated to your new request ---
         switch (currentLevel) {
             case 2:
-                // Level 2 (Normal): 12 cards (6 pairs) in a 3x4 grid
                 gridColumnCount = 3;
                 gridRowCount = 4;
                 numPairs = 6;
-                timeLeftInMillis = 60000; // 60 seconds
+                timeLeftInMillis = 60000;
                 break;
             case 3:
-                // Level 3 (Hard): 16 cards (8 pairs) in a 4x4 grid
                 gridColumnCount = 4;
                 gridRowCount = 4;
                 numPairs = 8;
-                timeLeftInMillis = 80000; // 80 seconds
+                timeLeftInMillis = 80000;
                 break;
-            default: // case 1
-                // Level 1 (Easy): 10 cards (5 pairs) in a 2x5 grid
+            default:
                 gridColumnCount = 2;
                 gridRowCount = 4;
                 numPairs = 4;
-                timeLeftInMillis = 50000; // 50 seconds
+                timeLeftInMillis = 50000;
                 break;
         }
 
-        // Reset game state
         matchedPairs = 0;
         firstCard = -1;
         secondCard = -1;
@@ -107,15 +98,13 @@ public class MainActivity extends AppCompatActivity {
         gridLayout.setColumnCount(gridColumnCount);
         gridLayout.setRowCount(gridRowCount);
 
-        // REPLACE IT WITH THIS
-// Prepare the list of images for the current level
-        Collections.shuffle(allCardImages);
-        List<Integer> singleCards = allCardImages.subList(0, numPairs); // Create a temporary list of single cards
-        currentLevelCardImages = new ArrayList<>(singleCards); // Add the single cards once
-        currentLevelCardImages.addAll(singleCards); // Add them a second time to create pairs
-        Collections.shuffle(currentLevelCardImages); // Now shuffle the complete list of pairs
 
-        // Initialize and add cards to the grid
+        Collections.shuffle(allCardImages);
+        List<Integer> singleCards = allCardImages.subList(0, numPairs);
+        currentLevelCardImages = new ArrayList<>(singleCards);
+        currentLevelCardImages.addAll(singleCards);
+        Collections.shuffle(currentLevelCardImages);
+
         cards = new ArrayList<>();
         for (int i = 0; i < gridColumnCount * gridRowCount; i++) {
             ImageView card = new ImageView(this);
@@ -150,24 +139,20 @@ public class MainActivity extends AppCompatActivity {
             checkForMatch();
         }
     };
-    // Add this entire new method to MainActivity.java
 
     private void flipCardAnimation(final ImageView card, final int newImageResource) {
-        // This is a handler to delay the second part of the animation
         final Handler handler = new Handler();
 
-        // The first part of the animation: flipping the card out
+
         final Runnable flipOut = () -> {
-            // Set the camera distance for a 3D effect
             float scale = getApplicationContext().getResources().getDisplayMetrics().density;
             card.setCameraDistance(8000 * scale);
 
             ObjectAnimator animator = ObjectAnimator.ofFloat(card, "rotationY", 0f, 90f);
-            animator.setDuration(250); // Animation duration in milliseconds
+            animator.setDuration(250);
             animator.start();
         };
 
-        // The second part of the animation: flipping the card back in with the new image
         final Runnable flipIn = () -> {
             card.setImageResource(newImageResource);
 
@@ -176,10 +161,8 @@ public class MainActivity extends AppCompatActivity {
             animator.start();
         };
 
-        // Execute the first part of the animation
         flipOut.run();
 
-        // Post the second part of the animation with a delay that matches the first animation's duration
         handler.postDelayed(flipIn, 250);
     }
 

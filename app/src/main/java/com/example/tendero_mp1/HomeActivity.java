@@ -16,7 +16,6 @@ public class HomeActivity extends AppCompatActivity {
         Button btnPlayGame = findViewById(R.id.btnPlayGame);
 
         btnPlayGame.setOnClickListener(v -> {
-            // Create an Intent to start MainActivity (the game screen)
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
         });
